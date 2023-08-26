@@ -17,7 +17,9 @@ const Filters = ({ filters, setFilters, insiteData }) => {
     return uniqueValues;
   };
 
-  const filterOptions = ["start_year", "end_year", "topic", "sector", "region", "pestle", "source", "country"];
+  const filterOptions = ["start_year", "end_year", "topic", "sector", "region", "pestle", "source", "country", "swot"];
+
+  const swotOptions = ["strengths", "weaknesses", "opportunities", "threats"];
 
   return (
     <Accordion>
@@ -26,14 +28,25 @@ const Filters = ({ filters, setFilters, insiteData }) => {
         <Grid container spacing={2}>
           {filterOptions.map((filter) => (
             <Grid key={filter} item xs={6} md={3}>
-              <Autocomplete
-                sx={{ width: "100%" }}
-                id={`${filter}-autocomplete`}
-                options={generateOptions(filter).filter((item) => item !== ("" || null))}
-                value={filters[filter]}
-                onChange={handleChange(filter)}
-                renderInput={(params) => <TextField {...params} label={filter} />}
-              />
+              {filter === "swot" ? (
+                <Autocomplete
+                  sx={{ width: "100%" }}
+                  id={`${filter}-autocomplete`}
+                  options={swotOptions}
+                  value={filters[filter]}
+                  onChange={handleChange(filter)}
+                  renderInput={(params) => <TextField {...params} label={filter} />}
+                />
+              ) : (
+                <Autocomplete
+                  sx={{ width: "100%" }}
+                  id={`${filter}-autocomplete`}
+                  options={generateOptions(filter).filter((item) => item !== ("" || null))}
+                  value={filters[filter]}
+                  onChange={handleChange(filter)}
+                  renderInput={(params) => <TextField {...params} label={filter} />}
+                />
+              )}
             </Grid>
           ))}
         </Grid>

@@ -43,7 +43,7 @@ const options = {
 };
 
 const Logger = createLogger({
-  format: combine(label({ label: 'lms/rms' }), timestamp(), myFormat),
+  format: combine(label({ label: 'visualization-dashboard' }), timestamp(), myFormat),
   transports: [new transports.File(options.errorFile), new transports.File(options.globalLogs)],
   exitOnError: false, // do not exit on handled exceptions
 });
