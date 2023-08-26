@@ -38,6 +38,7 @@ const ColumnChartInsightsByRegion = ({ insightsData }) => {
   const options = {
     chart: {
       type: "column",
+      height: 500,
     },
     title: {
       text: "Column Chart: Insights by Region",

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
+// import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 import Filters from "../components/filters";
 import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 
 // ** Store & Actions
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getTotalInsights } from "../redux/actions/dashboard";
 
 // ** Charts
@@ -23,40 +25,58 @@ import ColumnChartInsightsByRegion from "../components/charts/barCharts/ColumnCh
 
 HighchartsExporting(Highcharts);
 
+const categorizeInsights = (insights) => {
+  const categorized = {
+    strengths: [],
+    weaknesses: [],
+    opportunities: [],
+    threats: [],
+  };
+
+  insights.forEach((insight) => {
+    if (insight.topic === "growth" || insight.topic === "positive_topic") {
+      categorized.strengths.push(insight);
+    } else if (insight.topic === "risk" || insight.topic === "negative_topic") {
+      categorized.weaknesses.push(insight);
+    } else if (insight.topic === "opportunity") {
+      categorized.opportunities.push(insight);
+    } else if (insight.topic === "threat") {
+      categorized.threats.push(insight);
+    }
+  });
+
+  return categorized;
+};
+
 const Home = () => {
+  const [insightData, setInsightData] = useState([]);
   const [filters, setFilters] = useState({});
 
   const dispatch = useDispatch();
-  const store = useSelector((state) => state.dashboard);
 
   useEffect(() => {
     dispatch(getTotalInsights(filters)).then((res) => {
-      if (filters.swot !== "" && filters.swot !== undefined) {
-        const fd = applySWOTFilter(res.data, filters.swot);
-        console.log(fd);
-        return fd;
-      }
+      const newData = filters.swot ? applySWOTFilter(res.data, filters.swot) : res.data;
+      setInsightData(newData);
     });
   }, [filters, dispatch]);
 
-  function applySWOTFilter(data, filterCategory) {
-    const filteredData = data.filter((item) => {
-      switch (filterCategory) {
-        case "strengths":
-          return item.impact > 0 && item.relevance >= 3 && item.likelihood >= 3;
-        case "weaknesses":
-          return item.impact < 0 && item.relevance >= 3 && item.likelihood >= 3;
-        case "opportunities":
-          return item.impact > 0 && item.relevance >= 3 && item.likelihood < 3;
-        case "threats":
-          return item.impact < 0 && item.relevance >= 3 && item.likelihood < 3;
-        default:
-          return false; // Return false for an unknown filter
-      }
-    });
+  const applySWOTFilter = (data, filterCategory) => {
+    const categorizedData = categorizeInsights(data);
 
-    return filteredData;
-  }
+    switch (filterCategory) {
+      case "strengths":
+        return categorizedData.strengths;
+      case "weaknesses":
+        return categorizedData.weaknesses;
+      case "opportunities":
+        return categorizedData.opportunities;
+      case "threats":
+        return categorizedData.threats;
+      default:
+        return [];
+    }
+  };
 
   return (
     <Box
@@ -68,103 +88,108 @@ const Home = () => {
         overflow: "auto",
       }}
     >
-      <Toolbar />
+      {/* <Toolbar /> */}
 
-      {store.insightData.data?.length > 0 && (
-        <>
-          {/* Filters Container */}
-          <Container maxWidth="lg" disableGutters sx={{ mt: 4, mb: 4 }}>
-            <Filters filters={filters} setFilters={setFilters} insiteData={store.insightData.data} />
-          </Container>
+      {/* Filters Container */}
+      <Container maxWidth="lg" disableGutters sx={{ mt: 4, mb: 4 }}>
+        <Filters filters={filters} setFilters={setFilters} insiteData={insightData} />
+      </Container>
 
-          {/* Charts Container */}
-          <Container maxWidth="lg" disableGutters sx={{ mt: 4, mb: 4 }}>
-            {/* Grid Container */}
-            <Grid container spacing={3}>
-              {/* StackedColumnChart */}
-              <Grid item xs={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <div style={{ height: "100%", width: "100%" }}>
-                    <StackedColumnChart data={store.insightData.data} />
-                  </div>
-                </Paper>
-              </Grid>
+      {/* Charts Container */}
+      <Container maxWidth="lg" disableGutters sx={{ mt: 4, mb: 4 }}>
+        {/* Grid Container */}
+        <Grid container spacing={3}>
+          {/* StackedColumnChart */}
+          <Grid item xs={12}>
+            <Paper
+              sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div style={{ height: "100%", width: "100%" }}>
+                <StackedColumnChart data={insightData} />
+              </div>
+            </Paper>
+          </Grid>
 
-              {/* Pie Charts */}
+          {/* Pie Charts */}
 
-              <Grid item xs={12} sm={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <div style={{ height: "100%", width: "100%" }}>
-                    <PieChartRegionDistribution insightsData={store.insightData.data} />
-                  </div>
-                </Paper>
-              </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper
+              sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div style={{ height: "100%", width: "100%" }}>
+                <PieChartRegionDistribution insightsData={insightData} />
+              </div>
+            </Paper>
+          </Grid>
 
-              <Grid item xs={12} sm={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <div style={{ height: "100%", width: "100%" }}>
-                    <PieChartSectorDistribution insightsData={store.insightData.data} />
-                  </div>
-                </Paper>
-              </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper
+              sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div style={{ height: "100%", width: "100%" }}>
+                <PieChartSectorDistribution insightsData={insightData} />
+              </div>
+            </Paper>
+          </Grid>
 
-              {/* StackedBarChartPestleAnalysis */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <div style={{ height: "100%", width: "100%" }}>
-                    <StackedBarChartPestleAnalysis data={store.insightData.data} />
-                  </div>
-                </Paper>
-              </Grid>
+          {/* StackedBarChartPestleAnalysis */}
+          <Grid item xs={12}>
+            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <div style={{ height: "100%", width: "100%" }}>
+                <StackedBarChartPestleAnalysis data={insightData} />
+              </div>
+            </Paper>
+          </Grid>
 
-              {/* BubbleChart */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <div style={{ height: "100%", width: "100%" }}>
-                    <BubbleChart data={store.insightData.data} />
-                  </div>
-                </Paper>
-              </Grid>
+          {/* BubbleChart */}
+          <Grid item xs={12}>
+            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <div style={{ height: "100%", width: "100%" }}>
+                <BubbleChart data={insightData} />
+              </div>
+            </Paper>
+          </Grid>
 
-              {/* ScatterPlotIntensityRelevance */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <div style={{ height: "100%", width: "100%" }}>
-                    <ScatterPlotIntensityRelevance data={store.insightData.data} />
-                  </div>
-                </Paper>
-              </Grid>
+          {/* ScatterPlotIntensityRelevance */}
+          <Grid item xs={12}>
+            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <div style={{ height: "100%", width: "100%" }}>
+                <ScatterPlotIntensityRelevance data={insightData} />
+              </div>
+            </Paper>
+          </Grid>
 
-              {/* ColumnChartInsightsByRegion */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column", mb: 10 }}>
-                  <div style={{ height: "100%", width: "100%" }}>
-                    <ColumnChartInsightsByRegion insightsData={store.insightData.data} />
-                  </div>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Container>
-        </>
-      )}
+          {/* ColumnChartInsightsByRegion */}
+          <Grid item xs={12}>
+            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <div style={{ height: "100%", width: "100%" }}>
+                <ColumnChartInsightsByRegion insightsData={insightData} />
+              </div>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        {/* footer */}
+        <Typography variant="body2" color="text.primary" align="center" sx={{ p: 7, fontWeight: "bold", fontSize: "large" }}>
+          {"Made With ❤️ by "}
+          <Link color="inherit" href="https://www.linkedin.com/in/imkrrish/" target="_blank">
+            Krishan Kumar
+          </Link>{" "}
+          {"."}
+        </Typography>
+      </Container>
     </Box>
   );
 };

@@ -27,7 +27,7 @@ export default class App {
     // security middlewares
     this.app.use(
       cors({
-        origin: ['http://localhost:3000', 'https://lead.nebulaholdings.co'],
+        origin: ['http://localhost:3000'],
         credentials: true,
       })
     );

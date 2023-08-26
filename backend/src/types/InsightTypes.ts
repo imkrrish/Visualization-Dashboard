@@ -20,14 +20,14 @@ export interface Iinsight extends Document {
   likelihood: number;
 }
 
-export interface IFilters {
-  start_year?: number;
-  end_year?: number;
-  topics?: string[];
-  sector?: string;
-  region?: string;
-  pestle?: string;
-  source?: string;
-  country?: string;
-  city?: string;
-}
+// export interface IFilters {
+//   start_year?: number;
+//   end_year?: number;
+//   topics?: string[];
+//   sector?: string;
+//   region?: string;
+//   pestle?: string;
+//   source?: string;
+//   country?: string;
+//   city?: string;
+// }

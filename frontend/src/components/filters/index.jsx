@@ -23,7 +23,7 @@ const Filters = ({ filters, setFilters, insiteData }) => {
 
   return (
     <Accordion>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>Filters</AccordionSummary>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{fontSize: "large", fontWeight: "semibold"}}>Filters</AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>
           {filterOptions.map((filter) => (

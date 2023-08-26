@@ -3,45 +3,30 @@ import moment from 'moment';
 export default class BaseRepo {
   constructor() {}
 
-  setStatus(matchQuery: any, type: string): void {
-    switch (type) {
-      case 'inactive':
-        matchQuery.isActive = false;
-        break;
-      case 'all':
-        break;
-      case 'active':
-      default:
-        matchQuery.isActive = true;
-    }
-  }
+  // setStatus(matchQuery: any, type: string): void {
+  //   switch (type) {
+  //     case 'inactive':
+  //       matchQuery.isActive = false;
+  //       break;
+  //     case 'all':
+  //       break;
+  //     case 'active':
+  //     default:
+  //       matchQuery.isActive = true;
+  //   }
+  // }
 
-  setQueryDate(matchQuery: any, startDate: string | undefined, endDate: string | undefined): void {
-    if (startDate && endDate) {
-      const startedDate = new Date(moment(startDate).format('YYYY-MM-DDT00:00:00.000') + 'Z');
-      const endedDate = new Date(moment(endDate).format('YYYY-MM-DDT23:59:59.999') + 'Z');
-      matchQuery.createdAt = {
-        $gte: startedDate,
-        $lte: endedDate,
-      };
-    }
-  }
+  // setQueryDate(matchQuery: any, startDate: string | undefined, endDate: string | undefined): void {
+  //   if (startDate && endDate) {
+  //     const startedDate = new Date(moment(startDate).format('YYYY-MM-DDT00:00:00.000') + 'Z');
+  //     const endedDate = new Date(moment(endDate).format('YYYY-MM-DDT23:59:59.999') + 'Z');
+  //     matchQuery.createdAt = {
+  //       $gte: startedDate,
+  //       $lte: endedDate,
+  //     };
+  //   }
+  // }
 
-  setQuery(query: any, matchQuery: any): void {
-    if (query.q) {
-      const regx = new RegExp(query.q, 'i');
-      matchQuery.name = {
-        $regex: regx,
-      };
-    }
-  }
-
-  setCustomerQuery(query: any, matchQuery: any): void {
-    if (query.q) {
-      const regx = new RegExp(query.q, 'i');
-      matchQuery.$or = [{ name: { $regex: regx } }, { email: { $regex: regx } }, { phone: parseInt(query.q) }];
-    }
-  }
 
   getPagination(query: any): { skip: number; limit: number } {
     const page = query.page || 1;

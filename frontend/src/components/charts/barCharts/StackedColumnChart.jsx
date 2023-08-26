@@ -19,6 +19,7 @@ const StackedColumnChart = ({ data }) => {
   const options = {
     chart: {
       type: "column",
+      height: 500,
     },
     navigation: {
       buttonOptions: {

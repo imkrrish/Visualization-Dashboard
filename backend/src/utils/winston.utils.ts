@@ -49,12 +49,3 @@ const Logger = createLogger({
 });
 
 export default Logger;
-
-// Logger.error("This is an error log");
-// Logger.warn("This is a warn log");
-// Logger.info("This is a info log");
-// Logger.http("This is a http log");
-// Logger.debug("This is a debug log");
-
-// ref
-// https://stackoverflow.com/questions/59016773/is-there-a-way-to-get-the-details-of-a-class-in-a-typescipt-program-so-that-i-ca
