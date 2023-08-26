@@ -1,0 +1,113 @@
+Bar Chart - Intensity by Topic:
+Visualize the intensity of insights by topic using a bar chart.
+
+Pie Chart - Likelihood Distribution:
+Show the distribution of insights' likelihood using a pie chart.
+
+Scatter Plot - Intensity vs. Relevance:
+Compare the intensity and relevance of insights using a scatter plot.
+
+Line Chart - Insights Over Years:
+Display the number of insights added over the years using a line chart.
+
+Bar Chart - Top Countries by Insight Count:
+Show the top countries with the highest number of insights using a bar chart.
+
+Bar Chart - Top Topics by Insight Count:
+Display the most common topics with the highest insight count using a bar chart.
+
+Map - Insights Distribution by Region/Country:
+Use a map to show the distribution of insights across different regions or countries.
+
+Bubble Chart - Intensity vs. Likelihood vs. Relevance:
+Visualize the relationships between intensity, likelihood, and relevance using a bubble chart.
+
+Bar Chart - Insights by Region:
+Display the number of insights for each region using a bar chart.
+
+Bar Chart - Insights by City:
+If you have city data available, you can create a bar chart to show insights distribution by city.
+
+
+Pie Chart: Sector Distribution:
+This chart can show the distribution of insights across different sectors, helping you understand which sectors are most commonly discussed or impacted by the insights. It provides a quick visual overview of where the focus of insights lies.
+
+Pie Chart: Topic Distribution:
+Similar to the sector distribution, this chart can show the distribution of insights based on different topics. It helps identify which specific topics are being discussed the most, giving insights into trends and areas of interest.
+
+Pie Chart: Region Distribution:
+This chart can show the distribution of insights across different regions. It helps identify geographical trends and areas where insights are more prevalent, helping you focus on specific regions for further analysis or action.
+
+Pie Chart: Likelihood Distribution:
+As mentioned earlier, a pie chart can show the distribution of insights' likelihood values. This helps you understand the likelihood assigned to different insights, allowing you to prioritize actions or decisions based on the perceived likelihood.
+
+Pie Chart: Relevance Distribution:
+Similar to the likelihood distribution, this chart can show the distribution of insights' relevance values. It helps you gauge the relevance of different insights, assisting in prioritizing actions based on their potential impact.
+
+Pie Chart: Country Distribution:
+This chart can show the distribution of insights across different countries. It's particularly useful if you have insights from various countries, helping you understand where the insights are originating or where they have an impact.
+
+Pie Chart: Pestle Distribution:
+Similar to sectors and topics, this chart can show the distribution of insights based on different PESTLE (Political, Economic, Sociocultural, Technological, Legal, Environmental) categories. It helps in categorizing and understanding the nature of insights.
+
+Pie Chart: Impact Distribution:
+This chart can show the distribution of insights' impact values. It helps in identifying which insights are considered to have high or low impact, aiding in decision-making and resource allocation.
+
+
+
+
+Column Chart: Intensity by Sector
+This chart can show the average intensity of insights for each sector. It helps identify which sectors have higher or lower average intensities. This information can be useful for understanding the impact and focus of insights within different sectors, guiding decision-making and resource allocation.
+
+Column Chart: Relevance by Topic
+Display the average relevance of insights for each topic. This chart can highlight which topics are most relevant or impactful based on the average relevance scores. It provides insights into which areas require more attention or analysis for potential actions or strategies.
+
+Column Chart: Likelihood by Region
+Show the average likelihood of insights for each region. This chart can reveal regions where insights are more likely to occur. It's valuable for understanding regional trends and potential risks or opportunities in different parts of the world.
+
+Column Chart: Insight Count by Year
+This chart can display the number of insights added over different years. It helps identify trends, spikes, or drops in insight generation, allowing you to allocate resources effectively based on historical data.
+
+Column Chart: Insight Count by Country
+Visualize the number of insights from different countries. This chart can provide insights into which countries contribute more insights, helping you identify key sources of information and potential areas of focus.
+
+Column Chart: Insight Count by Source
+Display the count of insights from different sources (e.g., EIA, sustainablebrands.com). This chart helps you understand the distribution of insights across different sources and gauge the reliability or prevalence of each source.
+
+Column Chart: Impact by Pestle
+Show the average impact of insights for each PESTLE category (Political, Economic, Social, Technological, Legal, Environmental). This chart can help identify which categories have the highest impact, allowing you to focus on areas with greater potential consequences.
+
+
+Stacked Column Chart: Insights by Sector and Region
+
+X-Axis: Sectors
+Y-Axis: Count of Insights
+Stacks: Regions
+This chart combines sectors and regions to show how insights are distributed across different sectors while also comparing the distribution within each sector among various regions.
+
+Analytics Significance:
+
+Sector Analysis: You can observe which sectors have the highest and lowest number of insights, providing insights into which industries are being affected or discussed the most.
+Regional Trends within Sectors: Analyzing the stacks within each sector reveals how insights are distributed among different regions. This helps identify regional hotspots for specific sectors, which can influence targeted actions.
+Grouped Column Chart: Insights by Year and Region
+
+X-Axis: Years
+Y-Axis: Count of Insights
+Groups: Regions
+This chart groups insights by year and further breaks them down by region, allowing you to see how the distribution of insights evolves over time within each region.
+
+Analytics Significance:
+
+Temporal Trends: By observing the changes in insight distribution over the years, you can identify whether certain regions are experiencing shifts in focus or intensity of discussions.
+Regional Comparison: Comparing the columns within each year across regions helps you understand regional variations in insight distribution for specific time periods.
+These stacked and grouped column charts offer the following analytical advantages:
+
+Comparative Analysis: Both charts allow you to perform comparative analysis across categories (sectors, years) while considering regional differences. This enables you to spot patterns, trends, and anomalies that might not be immediately apparent in a simple bar chart.
+
+Pattern Recognition: The combination of stacked and grouped columns provides a richer visualization that can help you recognize patterns, such as sectors that consistently dominate discussions or years where certain regions see significant changes.
+
+Segmentation Insights: The charts allow you to segment your data in multiple dimensions simultaneously, providing a more holistic view of how different variables interact and impact each other.
+
+Data-Driven Decisions: By understanding how different variables relate to each other in the context of your insights, you can make more informed decisions and prioritize actions based on data-driven insights.
+
+Communication: These charts are useful for communicating complex relationships between various dimensions to stakeholders and decision-makers. They provide a clear visual representation of the data's nuances.
